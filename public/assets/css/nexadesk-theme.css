@@ -1,0 +1,385 @@
+/*
+ * NexaDesk -- lapisan tema di atas Metronic.
+ *
+ * Dimuat SETELAH style.bundle.css (lihat config/settings.php, KT_THEME_ASSETS),
+ * jadi cukup mendefinisikan ulang variabelnya tanpa menyentuh berkas tema.
+ *
+ * Tema bawaan memakai hijau-tosca (#20c997) sebagai warna utama. Berkas ini
+ * menggantinya dengan palet biru NexaDesk di seluruh aplikasi -- isi halaman,
+ * sidebar, header -- lengkap dengan versi mode gelapnya. Ubah palet di blok
+ * :root pertama untuk mengganti warnanya.
+ *
+ * Hampir semua komponen Metronic membaca var(--bs-...) sehingga cukup
+ * variabelnya yang diganti. Yang menuliskan warna secara langsung ditimpa
+ * terpisah di bawah.
+ */
+
+:root {
+    --nexadesk-deep: #0b2447;
+    --nexadesk-mid: #144272;
+    --nexadesk-bright: #205295;
+    --nexadesk-sky: #6cb4ff;
+    --nexadesk-tint: #eaf1fa;
+    --nexadesk-line: rgba(32, 82, 149, .14);
+    --nexadesk-gradient: linear-gradient(135deg, #0b2447 0%, #144272 55%, #205295 100%);
+
+    /* Warna aksen teks & ikon yang tetap terbaca di kedua mode */
+    --nexadesk-accent: var(--nexadesk-bright);
+    --nexadesk-soft-line: rgba(32, 82, 149, .08);
+    --nexadesk-hover: #f3f7fc;
+}
+
+[data-bs-theme="dark"] {
+    --nexadesk-accent: var(--nexadesk-sky);
+    --nexadesk-soft-line: rgba(255, 255, 255, .06);
+    --nexadesk-hover: rgba(255, 255, 255, .04);
+}
+
+/* ------------------------------------------------------------------
+   1. Warna utama tema
+   ------------------------------------------------------------------ */
+:root,
+[data-bs-theme="light"],
+[data-bs-theme="dark"] {
+    --bs-primary: #205295;
+    --bs-primary-active: #144272;
+    --bs-primary-light: #eaf1fa;
+    --bs-primary-inverse: #ffffff;
+    --bs-primary-rgb: 32, 82, 149;
+    --bs-text-primary: #205295;
+
+    --bs-link-color: #205295;
+    --bs-link-hover-color: #144272;
+
+    --bs-component-active-bg: #205295;
+    --bs-component-hover-color: #205295;
+    --bs-component-checked-bg: #205295;
+
+    --bs-menu-link-color-hover: #205295;
+    --bs-menu-link-color-show: #205295;
+    --bs-menu-link-color-here: #205295;
+    --bs-menu-link-color-active: #205295;
+    --bs-menu-link-bg-color-hover: #f3f7fc;
+    --bs-menu-link-bg-color-show: #f3f7fc;
+    --bs-menu-link-bg-color-here: #f3f7fc;
+    --bs-menu-link-bg-color-active: #f3f7fc;
+
+    --bs-ribbon-label-bg: #205295;
+    --bs-ribbon-label-border-color: #144272;
+    --bs-scrolltop-bg-color: #205295;
+    --bs-scrolltop-bg-color-hover: #144272;
+}
+
+/* Di mode gelap, biru tua tidak terbaca sebagai teks: pakai biru langit. */
+[data-bs-theme="dark"] {
+    --bs-primary-light: rgba(108, 180, 255, .12);
+    --bs-text-primary: #7db8ff;
+    --bs-link-color: #7db8ff;
+    --bs-link-hover-color: #a8cfff;
+    --bs-component-hover-color: #7db8ff;
+
+    --bs-menu-link-color-hover: #7db8ff;
+    --bs-menu-link-color-show: #7db8ff;
+    --bs-menu-link-color-here: #7db8ff;
+    --bs-menu-link-color-active: #7db8ff;
+    --bs-menu-link-bg-color-hover: rgba(108, 180, 255, .08);
+    --bs-menu-link-bg-color-show: rgba(108, 180, 255, .08);
+    --bs-menu-link-bg-color-here: rgba(108, 180, 255, .08);
+    --bs-menu-link-bg-color-active: rgba(108, 180, 255, .08);
+}
+
+/* ------------------------------------------------------------------
+   2. Kerangka aplikasi: latar, header, sidebar, kartu, footer
+   ------------------------------------------------------------------ */
+:root,
+[data-bs-theme="light"] {
+    --bs-app-bg-color: #f3f6fb;
+    --bs-app-header-base-bg-color: rgba(243, 246, 251, .78);
+    --bs-app-header-minimize-bg-color: rgba(255, 255, 255, .86);
+    --bs-app-header-minimize-box-shadow: 0 10px 30px -18px rgba(11, 36, 71, .25);
+
+    --bs-app-sidebar-light-bg-color: #ffffff;
+    --bs-app-sidebar-light-box-shadow: none;
+    --bs-app-sidebar-light-menu-link-bg-color-active: #eaf1fa;
+    --bs-app-sidebar-light-menu-link-color: #3b4558;
+    --bs-app-sidebar-light-menu-link-icon-color: #8a96a8;
+    --bs-app-sidebar-light-menu-heading-color: #9aa5b5;
+
+    --bs-root-card-border-color: rgba(32, 82, 149, .08);
+    --bs-root-card-box-shadow: 0 1px 2px rgba(11, 36, 71, .04), 0 14px 32px -20px rgba(11, 36, 71, .22);
+}
+
+[data-bs-theme="dark"] {
+    --bs-body-bg: #111a2c;
+    --bs-body-bg-rgb: 17, 26, 44;
+    --bs-app-bg-color: #0b1120;
+    --bs-app-header-base-bg-color: rgba(11, 17, 32, .78);
+    --bs-app-header-minimize-bg-color: rgba(14, 22, 38, .88);
+    --bs-app-header-minimize-box-shadow: 0 10px 30px -18px rgba(0, 0, 0, .6);
+
+    --bs-app-sidebar-light-bg-color: #0e1626;
+    --bs-app-sidebar-light-box-shadow: none;
+    --bs-app-sidebar-light-menu-link-bg-color-active: rgba(108, 180, 255, .10);
+    --bs-app-sidebar-light-menu-link-color: #c3cbd8;
+    --bs-app-sidebar-light-menu-link-icon-color: #6f7b8f;
+    --bs-app-sidebar-light-menu-heading-color: #5f6b80;
+
+    --bs-root-card-border-color: rgba(255, 255, 255, .06);
+    --bs-root-card-box-shadow: none;
+}
+
+/* Header "kaca": isi halaman tampak samar saat digulir di bawahnya */
+.app-header {
+    -webkit-backdrop-filter: saturate(160%) blur(12px);
+    backdrop-filter: saturate(160%) blur(12px);
+    border-bottom: 1px solid var(--nexadesk-soft-line);
+}
+
+[data-kt-app-layout="light-sidebar"] .app-sidebar {
+    border-right: 1px solid var(--nexadesk-soft-line);
+}
+
+/* Menu sidebar: pil membulat, aktif ditandai warna + garis aksen di kiri */
+[data-kt-app-layout="light-sidebar"] .app-sidebar .menu .menu-item .menu-link {
+    border-radius: .75rem;
+    transition: background-color .15s ease, color .15s ease;
+}
+
+[data-kt-app-layout="light-sidebar"] .app-sidebar .menu .menu-item .menu-link:hover:not(.disabled):not(.active):not(.here) {
+    background-color: var(--nexadesk-hover);
+}
+
+[data-kt-app-layout="light-sidebar"] .app-sidebar .menu .menu-item .menu-link.active {
+    position: relative;
+    color: var(--nexadesk-accent);
+}
+
+[data-kt-app-layout="light-sidebar"] .app-sidebar .menu .menu-item .menu-link.active .menu-title,
+[data-kt-app-layout="light-sidebar"] .app-sidebar .menu .menu-item .menu-link.active .menu-icon,
+[data-kt-app-layout="light-sidebar"] .app-sidebar .menu .menu-item .menu-link.active .menu-icon i {
+    color: var(--nexadesk-accent);
+}
+
+[data-kt-app-layout="light-sidebar"] .app-sidebar .menu .menu-item .menu-link.active .menu-title {
+    font-weight: 600;
+}
+
+[data-kt-app-layout="light-sidebar"] .app-sidebar .menu .menu-item .menu-link.active::before {
+    content: "";
+    position: absolute;
+    top: 22%;
+    bottom: 22%;
+    left: 0;
+    width: 3px;
+    border-radius: 0 3px 3px 0;
+    background: var(--nexadesk-gradient);
+}
+
+[data-bs-theme="dark"] [data-kt-app-layout="light-sidebar"] .app-sidebar .menu .menu-item .menu-link.active::before {
+    background: var(--nexadesk-sky);
+}
+
+.app-sidebar .menu-heading {
+    font-size: .72rem !important;
+    letter-spacing: .06em;
+}
+
+/* Kartu sedikit lebih membulat */
+.card {
+    --bs-card-border-radius: 1rem;
+    --bs-card-inner-border-radius: calc(1rem - 1px);
+}
+
+.app-footer {
+    border-top: 1px solid var(--nexadesk-soft-line);
+}
+
+/* Loader halaman */
+.page-loader .nd-loader-logo {
+    height: 52px;
+    border-radius: 22%;
+    box-shadow: 0 10px 24px -8px rgba(11, 36, 71, .45);
+    animation: nd-pulse 1.4s ease-in-out infinite;
+}
+
+@keyframes nd-pulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(.94); opacity: .75; }
+}
+
+/* Muncul halus dari bawah, dipakai elemen dashboard */
+.nd-rise {
+    animation: nd-rise .5s cubic-bezier(.2, .7, .2, 1) both;
+}
+
+@keyframes nd-rise {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .nd-rise,
+    .page-loader .nd-loader-logo {
+        animation: none;
+    }
+}
+
+/* ------------------------------------------------------------------
+   3. Komponen kecil di header: avatar, chip pengguna, tombol ikon
+   ------------------------------------------------------------------ */
+.nd-avatar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: .75rem;
+    background: var(--nexadesk-gradient);
+    color: #ffffff;
+    font-size: .9rem;
+    font-weight: 700;
+    letter-spacing: .02em;
+}
+
+.nd-avatar--lg {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 1rem;
+    font-size: 1.15rem;
+}
+
+.nd-user-chip {
+    display: flex;
+    align-items: center;
+    gap: .65rem;
+    padding: .3rem .85rem .3rem .3rem;
+    border: 1px solid var(--nexadesk-soft-line);
+    border-radius: 1rem;
+    background: var(--bs-body-bg);
+    transition: border-color .15s ease, box-shadow .15s ease;
+}
+
+.nd-user-chip:hover,
+.nd-user-chip.show {
+    border-color: var(--nexadesk-line);
+    box-shadow: 0 10px 24px -16px rgba(11, 36, 71, .45);
+}
+
+.nd-user-chip__text {
+    max-width: 180px;
+}
+
+.nd-user-chip__caret {
+    width: .45rem;
+    height: .45rem;
+    margin: 0 .1rem -.15rem .25rem;
+    border-right: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
+    transform: rotate(45deg) translateY(-4px);
+}
+
+.nd-icon-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.6rem;
+    height: 2.6rem;
+    padding: 0;
+    border: 1px solid var(--nexadesk-soft-line);
+    border-radius: .9rem;
+    background: var(--bs-body-bg);
+    color: var(--bs-gray-600);
+    transition: color .15s ease, border-color .15s ease;
+}
+
+.nd-icon-btn:hover,
+.nd-icon-btn:focus-visible {
+    color: var(--nexadesk-accent);
+    border-color: var(--nexadesk-line);
+}
+
+/* Plugin Keenicons memaksa ikon berwarna --bs-text-muted; di sini ikon ikut warna tombolnya. */
+.nd-icon-btn .ki-duotone {
+    color: inherit;
+}
+
+/* ------------------------------------------------------------------
+   4. Komponen yang menulis warna langsung, bukan lewat variabel
+   ------------------------------------------------------------------ */
+.form-check-input:checked,
+.form-check-input[type="checkbox"]:indeterminate {
+    background-color: var(--bs-primary);
+    border-color: var(--bs-primary);
+}
+
+/* ------------------------------------------------------------------
+   5. Tombol utama
+   ------------------------------------------------------------------ */
+.btn.btn-primary {
+    background-image: var(--nexadesk-gradient);
+    border-color: transparent;
+    box-shadow: 0 3px 10px rgba(11, 36, 71, .2);
+}
+
+.btn.btn-primary:hover:not(.btn-active):not(:disabled),
+.btn.btn-primary:focus:not(.btn-active):not(:disabled),
+.btn.btn-primary:active:not(.btn-active):not(:disabled) {
+    background-image: var(--nexadesk-gradient);
+    border-color: transparent;
+    filter: brightness(1.15);
+}
+
+.btn.btn-primary:disabled,
+.btn.btn-primary.disabled {
+    background-image: none;
+    box-shadow: none;
+    filter: none;
+}
+
+/* Sidebar memakai tombol lipat bergaya primary -- biarkan polos seperti asal. */
+.app-sidebar .btn.btn-primary {
+    background-image: none;
+    box-shadow: none;
+}
+
+/* ------------------------------------------------------------------
+   6. Judul halaman & kartu
+   ------------------------------------------------------------------ */
+:root:not([data-bs-theme="dark"]) .page-title>.page-heading {
+    color: var(--nexadesk-deep) !important;
+}
+
+/* Palang gradasi kecil di depan judul kartu sebagai penanda visual. Judul
+   bersusun ke bawah (flex-column) dilewati supaya palangnya tidak menumpuk
+   di atas teks. */
+.card>.card-header>.card-title:not(.flex-column)::before {
+    content: '';
+    width: 4px;
+    height: 18px;
+    border-radius: 99px;
+    background: var(--nexadesk-gradient);
+    margin-right: .65rem;
+    flex-shrink: 0;
+}
+
+.card>.card-header {
+    border-bottom-color: var(--nexadesk-soft-line);
+}
+
+/* ------------------------------------------------------------------
+   7. Tabel & paginasi
+   ------------------------------------------------------------------ */
+:root:not([data-bs-theme="dark"]) .table thead th {
+    color: var(--nexadesk-mid) !important;
+}
+
+[data-bs-theme="dark"] .table thead th {
+    color: #9db6d8 !important;
+}
+
+.page-item.active .page-link {
+    background-image: var(--nexadesk-gradient);
+    border-color: transparent;
+    color: #ffffff;
+}
